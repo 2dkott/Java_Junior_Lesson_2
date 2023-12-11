@@ -41,6 +41,13 @@ public class Main {
             System.out.println("The second test run");
         }
 
+        @Skip
+        @Test
+        @Order(2)
+        public void testThree() {
+            System.out.println("The third test run");
+        }
+
 
 
     }

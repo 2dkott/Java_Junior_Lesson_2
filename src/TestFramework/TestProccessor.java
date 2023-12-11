@@ -24,7 +24,10 @@ public class TestProccessor {
             Optional<Method> beforeEach = methods.stream().filter(method -> method.isAnnotationPresent(BeforeEach.class)).findFirst();
             Optional<Method> afterAll = methods.stream().filter(method -> method.isAnnotationPresent(AfterAll.class)).findFirst();
             Optional<Method> afterEach = methods.stream().filter(method -> method.isAnnotationPresent(AfterEach.class)).findFirst();
-            List<Method> testMethods = sortTestMethods(methods.stream().filter(method -> method.isAnnotationPresent(Test.class)).toList());
+            List<Method> testMethods = sortTestMethods(methods.stream()
+                    .filter(method -> method.isAnnotationPresent(Test.class))
+                    .filter(method -> !method.isAnnotationPresent(Skip.class))
+                    .toList());
 
             beforeAllMethod.ifPresent(method -> {
                 checkMethodSignature(method);
